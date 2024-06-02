@@ -11,7 +11,7 @@ COPY flag.txt /app
 RUN apt-get update && apt-get install -y socat
 
 # Compile the C file
-RUN gcc -o flag file.c
+RUN gcc -o flag file.c -fno-stack-protector
 
 # Run the command when the container launches
 CMD socat -T60 TCP-LISTEN:12345,reuseaddr,fork EXEC:"timeout 60 ./flag"
